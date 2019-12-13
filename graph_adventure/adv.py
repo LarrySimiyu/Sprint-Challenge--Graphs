@@ -63,7 +63,7 @@ while len(visited) < len(roomGraph) - 1:
     
     move = visited[player.currentRoom.id].pop(0) # get last value after getting exits
     traversalPath.append(move)
-    #print(traversalPath)
+    print(traversalPath)
     path.append(direction[move]) # add to path for the move you want to go
     player.travel(move)
     # travel function to move in that direction to the following room. 
