@@ -19,10 +19,13 @@ world.loadGraph(roomGraph)
 world.printRooms()
 player = Player("Name", world.startingRoom)
 
+# lecture notes - Use BFT
 
 # FILL THIS IN
-traversalPath = []
+# append to keep track of traversal path directions as shown in lecture
+# then we will find its length to print how many moves it took.
 
+traversalPath = []
 
 
 # TRAVERSAL TEST
