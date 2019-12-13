@@ -27,17 +27,46 @@ player = Player("Name", world.startingRoom)
 
 traversalPath = []
 
-path=[] # an array to keep track of where I currently am on the graph
+path = [] # an array to keep track of where I currently am on the graph
 
 # a way to keep track of the visited rooms so we dont repeat.
 #do this by having a dictionary 
-visted = {}
+visited = {}
 
 # need a way to back out of a room if it has no direction
     #if I've reached the final "north" want to go opposite by going "south"
 direction = {'n':'s', 's':'n', 'e':'w', 'w':'e'}
 
+#add the current room to visited dictionary
+#while in that room want to get the exits
+#which we grab from  room.py to navigate
+visited[player.currentRoom.id] = player.currentRoom.getExits()
 
+#loop
+    # if length of all rooms is still greater than visited then
+    # we have failed, all rooms are not visited
+while len(visited) < len(roomGraph) - 1:
+    # check if the current room is in the visited dictionary
+    if player.currentRoom.id not in visited:
+        # if it cant be found in visited then add it
+        visited[player.currentRoom.id] = player.currentRoom.getExits()
+        previous_dir = path[-1]
+        visited[player.currentRoom.id].remove(previous_dir)
+        # removing the previous set of exits so it doesnt repeat itself 
+    
+    #length of visited 0 show there are no more rooms to visit 
+    while len(visited[player.currentRoom.id]) == 0: 
+        # backtrack with previous_dir
+        previous_dir = path.pop()
+        traversalPath.append(previous_dir)
+        player.travel(previous_dir)
+    
+    move = visited[player.currentRoom.id].pop(0) # get last value after getting exits
+    traversalPath.append(move)
+    #print(traversalPath)
+    path.append(direction[move]) # add to path for the move you want to go
+    player.travel(move)
+    # travel function to move in that direction to the following room. 
 
 
 # TRAVERSAL TEST
