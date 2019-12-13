@@ -27,6 +27,18 @@ player = Player("Name", world.startingRoom)
 
 traversalPath = []
 
+path=[] # an array to keep track of where I currently am on the graph
+
+# a way to keep track of the visited rooms so we dont repeat.
+#do this by having a dictionary 
+visted = {}
+
+# need a way to back out of a room if it has no direction
+    #if I've reached the final "north" want to go opposite by going "south"
+direction = {'n':'s', 's':'n', 'e':'w', 'w':'e'}
+
+
+
 
 # TRAVERSAL TEST
 visited_rooms = set()
